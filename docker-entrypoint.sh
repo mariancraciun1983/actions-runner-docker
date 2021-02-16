@@ -37,6 +37,7 @@ configure() {
     --url ${GITHUB_REGISTER_URL} \
     --labels ${GITHUB_WORKER_LABELS} \
     --unattended \
+    --replace \
     --token "${WORKER_TOKEN}"
 }
 
