@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     wait-for-it \
     make \
     curl \
+    jq \
     && rm -rf /var/lib/apt/lists/*
 
 ARG DOCKER_UID=1000
@@ -27,5 +28,7 @@ RUN curl -sLf "https://github.com/actions/runner/releases/download/v${GHACTIONS_
     && rm actions-runner.tar.gz \
     && ./bin/installdependencies.sh \
     && chown -R runner:runner /runner
+
+COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 USER runner
