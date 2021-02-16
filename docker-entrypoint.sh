@@ -11,7 +11,12 @@ if [[ -z "${GITHUB_TOKEN_URL}" ]]; then
 fi
 
 if [[ -z "${GITHUB_REGISTER_URL}" ]]; then
-  echo "GITHUB_REGISTER_URL env is not set   (eg: https://github.com/OWNER OR https://github.com/OWNER/REPO"
+  echo "GITHUB_REGISTER_URL env is not set   (eg: https://github.com/OWNER OR https://github.com/OWNER/REPO)"
+  exit 1
+fi
+
+if [[ -z "${GITHUB_WORKER_LABELS}" ]]; then
+  echo "GITHUB_WORKER_LABELS env is not set   (eg: kubernetes,dev)"
   exit 1
 fi
 
@@ -30,7 +35,7 @@ configure() {
   echo "Registering worker for ${GITHUB_REGISTER_URL}"
   ./config.sh \
     --url ${GITHUB_REGISTER_URL} \
-    --labels kubernetes \
+    --labels ${GITHUB_WORKER_LABELS} \
     --unattended \
     --token "${WORKER_TOKEN}"
 }
