@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ci-cd
+resources:
+  - ./base/configmap.yaml
+  - ./base/secret.yaml
+  - ./base/headless-service.yaml
+  - ./base/deployment.yaml
+configMapGenerator:
+  - behavior: merge
+    name: github-actions
+    envs:
+      - config.env

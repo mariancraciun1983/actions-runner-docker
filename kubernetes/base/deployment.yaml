@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: github-actions-runner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: github-actions-runner
+  serviceName: github-actions-runner
+  template:
+    metadata:
+      labels:
+        app: github-actions-runner
+    spec:
+      containers:
+      - name: runner
+        image: mariancraciun/actions-runner-docker:v1.0
+        imagePullPolicy: IfNotPresent
+        envFrom:
+          - secretRef:
+              name: github-actions
+          - configMapRef:
+              name: github-actions
+        tty: true
+        command:
+          - /docker-entrypoint.sh
+      terminationGracePeriodSeconds: 60
