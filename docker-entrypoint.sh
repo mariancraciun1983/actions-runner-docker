@@ -29,7 +29,6 @@ fi
 configure() {
   echo "Registering worker for ${GITHUB_REGISTER_URL}"
   ./config.sh \
-    --name "TESTING" \
     --url ${GITHUB_REGISTER_URL} \
     --labels kubernetes \
     --unattended \

@@ -22,7 +22,6 @@ jobs:
       - name: Run a multi-line script
         shell: bash
         run: |
-          printenv|sort
           cat $GITHUB_EVENT_PATH
       - name: Validate GitHub Context
         shell: bash
